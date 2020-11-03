@@ -1,7 +1,7 @@
 /*
  * @Author: wangtengteng
  * @Date: 2020-10-30 18:13:15
- * @LastEditTime: 2020-10-30 18:36:08
+ * @LastEditTime: 2020-11-02 15:27:03
  * @FillPath: Do not edit
  */
 module.exports = {
@@ -23,11 +23,11 @@ module.exports = {
       // scss: {
       //   prependData: `@import "~@/variables.scss";`
       // },
-      less: {
-        globalVars: {
-          primary: '#fff'
-        }
-      }
+      // less: {
+      //   globalVars: {
+      //     primary: '#fff'
+      //   }
+      // }
     }, // Enable CSS modules for all css / pre-processor files. // This option does not affect *.vue files.
   },
   devServer: {
@@ -35,7 +35,11 @@ module.exports = {
     port: process.env.VUE_APP_PORT,
     public: process.env.VUE_APP_PUBLIC_URL,
     disableHostCheck: true,
-    open: true
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: false
+  },
   },
   configureWebpack: {
     name: '富文本编辑器'
@@ -50,5 +54,6 @@ module.exports = {
         return options;
       })
       .end();
-  }
+  },
+  lintOnSave: false
 }
