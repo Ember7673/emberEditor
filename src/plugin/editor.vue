@@ -1,7 +1,7 @@
 <!--
  * @Author: wangtengteng
  * @Date: 2020-10-30 15:04:20
- * @LastEditTime: 2020-11-04 18:47:12
+ * @LastEditTime: 2020-11-09 17:27:37
  * @FillPath: Do not edit
 -->
 <template>
@@ -13,7 +13,7 @@
           <i class="iconfont">&#xe64a;</i>
           上传图片
         </li>
-        <li>
+        <li @click="onChooseFormula">
           <i class="iconfont">&#xe6fd;</i>
           特殊符号
         </li>
@@ -24,11 +24,21 @@
       </ul>
     </div>
     <EditorDiv v-model="content" @editorBlur="editorBlur"></EditorDiv>
+
+    <el-dialog title="添加特殊符号" :visible.sync="formulaDialogVisible" width="50%">
+      <div id="fm-editor-body"></div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="onChooseFormulaCancle">取 消</el-button>
+        <el-button type="primary" @click="onConfirmFormula">确 定</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
   import EditorDiv from "../components/editor";
+  import utils from '@/utils/utils';
   import "../assets/css/iconfont/iconfont.css";
   export default {
     name: "EditorPanel",
@@ -40,6 +50,8 @@
         content: "这是一个可编辑段落。",
         imageUrl: '',
         range: {}, // 页面光标停止range
+        formulaObj: {}, //特殊符号对象
+        formulaDialogVisible: false,
       };
     },
     watch: {
@@ -47,6 +59,7 @@
         console.log("---", newVal);
       }
     },
+    mounted() {},
     methods: {
       onClear() {
         this.content = "";
@@ -64,8 +77,7 @@
               this.imageUrl = res.result.sArray[0].url;
               let imageNode = document.createElement('img');
               imageNode.src = this.imageUrl;
-              console.log('this.range', this.range)
-              if (Object.keys(this.range).length) {
+              if (utils.isEmpty(this.range)) {
                 this.content += `<img src="${this.imageUrl}" />`
               } else {
                 this.range.insertNode(imageNode);
@@ -160,6 +172,47 @@
         }
         return true;
       },
+      // 选择特殊符号，添加到页面上
+      onChooseFormula() {
+        this.formulaDialogVisible = true;
+        if (utils.isEmpty(this.formulaObj)) {
+          window.parameters = {};
+          this.formulaObj = new Editor(window.actions, window.panels, window.parameters);
+        } else {
+          // 删除特殊符号中输入文本区域内容
+          document.getElementsByClassName('fm-editor-content')[0].value = "";
+          // 删除特殊符号结果区域中内容
+          let resultNode = document.getElementsByClassName('fm-editor-result-area-inner')[0];
+          let child = resultNode.lastElementChild;
+          while (child) {
+            resultNode.removeChild(child);
+            child = resultNode.lastElementChild;
+          }
+        }
+      },
+      // 取消选择特殊符号
+      onChooseFormulaCancle() {
+        this.formulaDialogVisible = false;
+      },
+      // 确认选中的特殊符号
+      onConfirmFormula() {
+        let _this = this;
+        this.formulaObj.getEquationPng(function (src, mlang, equation) {
+          let formulaHtml = '<img class="fm-editor-equation" src="' + src + '" data-mlang="' + mlang +
+            '" data-equation="' + encodeURIComponent(equation) + '"/>'
+          if (utils.isEmpty(_this.range)) {
+            _this.content += formulaHtml;
+          } else {
+            let imageNode = document.createElement('img');
+            imageNode.src = src;
+            imageNode.className = 'fm-editor-equation';
+            imageNode.setAttribute('data-mlang', mlang);
+            imageNode.setAttribute('data-equation', encodeURIComponent(equation));
+            _this.range.insertNode(imageNode);
+          }
+        })
+        this.formulaDialogVisible = false;
+      }
     }
   };
 </script>

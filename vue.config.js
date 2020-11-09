@@ -1,9 +1,10 @@
 /*
  * @Author: wangtengteng
  * @Date: 2020-10-30 18:13:15
- * @LastEditTime: 2020-11-02 15:27:03
+ * @LastEditTime: 2020-11-09 11:27:26
  * @FillPath: Do not edit
  */
+const path = require('path');
 module.exports = {
   /* 输出文件目录：在npm run build时，生成文件的目录名称 */
   outputDir: 'dist',
@@ -39,10 +40,15 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: false
-  },
+    },
   },
   configureWebpack: {
-    name: '富文本编辑器'
+    name: '富文本编辑器',
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src')
+      }
+    }
   },
   chainWebpack: config => {
     config.module
