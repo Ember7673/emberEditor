@@ -1,7 +1,7 @@
 <!--
  * @Author: wangtengteng
  * @Date: 2020-10-30 15:04:20
- * @LastEditTime: 2020-11-09 17:27:37
+ * @LastEditTime: 2020-11-12 16:05:59
  * @FillPath: Do not edit
 -->
 <template>
@@ -9,29 +9,34 @@
     <div class="editor-header">
       <ul>
         <li>
-          <input type="file" @change="onUploadImg" />
+          <input ref="uploadImg" class="uploadImg" type="file" @change="onUploadImg" />
           <i class="iconfont">&#xe64a;</i>
-          上传图片
+          <!-- 上传图片 -->
         </li>
         <li @click="onChooseFormula">
           <i class="iconfont">&#xe6fd;</i>
-          特殊符号
+          <!-- 特殊符号 -->
         </li>
         <li @click="onClear">
           <i class="iconfont">&#xe74c;</i>
-          清空
+          <!-- 清空 -->
         </li>
       </ul>
     </div>
     <EditorDiv v-model="content" @editorBlur="editorBlur"></EditorDiv>
 
-    <el-dialog title="添加特殊符号" :visible.sync="formulaDialogVisible" width="50%">
+    <el-dialog title="添加特殊符号" :visible.sync="formulaDialogVisible" width="400">
       <div id="fm-editor-body"></div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="onChooseFormulaCancle">取 消</el-button>
         <el-button type="primary" @click="onConfirmFormula">确 定</el-button>
       </span>
     </el-dialog>
+
+    <div class="editor-footer">
+      <el-button>取 消</el-button>
+      <el-button type="primary" @click="onConfirmGetContent">确 定</el-button>
+    </div>
 
   </div>
 </template>
@@ -54,12 +59,6 @@
         formulaDialogVisible: false,
       };
     },
-    watch: {
-      content(newVal, oldVal) {
-        console.log("---", newVal);
-      }
-    },
-    mounted() {},
     methods: {
       onClear() {
         this.content = "";
@@ -81,7 +80,11 @@
                 this.content += `<img src="${this.imageUrl}" />`
               } else {
                 this.range.insertNode(imageNode);
+                this.content += `<img src="${this.imageUrl}" />`
               }
+              this.$forceUpdate()
+              // 处理上传同一个图片失效的问题
+              this.$refs['uploadImg'].value = null;
               // success(res.result.sArray[0].url);
             } else {
               console.log('文件地址错误');
@@ -209,9 +212,15 @@
             imageNode.setAttribute('data-mlang', mlang);
             imageNode.setAttribute('data-equation', encodeURIComponent(equation));
             _this.range.insertNode(imageNode);
+            _this.content += formulaHtml;
           }
         })
         this.formulaDialogVisible = false;
+      },
+      // 编辑器确定添加内容
+      onConfirmGetContent() {
+        let content = '<div>' + this.content + '</div>'
+        this.$emit('getContent', content);
       }
     }
   };
@@ -229,27 +238,49 @@
 
   .editor {
     border: 1px solid #ccc;
-    // min-width: 500px;
+    min-width: 300px;
     background: #fff;
 
     .editor-header {
       border-bottom: 1px solid #ccc;
-      min-width: 500px;
+      min-width: 300px;
+
+      .uploadImg {
+        opacity: 0;
+        width: 50px;
+        height: 35px;
+        position: absolute;
+      }
 
       li {
         display: inline-block;
         padding: 10px;
         cursor: pointer;
         font-size: 12px;
+        width: 50px;
+        height: 35px;
+        line-height: 35px;
 
         i {
           display: block;
           text-align: center;
+
         }
 
         &:hover {
           background: #ddd;
         }
+      }
+    }
+
+    .editor-footer {
+      border-top: 1px solid #ccc;
+      padding: 10px;
+      height: 40px;
+
+      button {
+        float: right;
+        margin-right: 20px;
       }
     }
   }

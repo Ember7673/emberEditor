@@ -1,7 +1,7 @@
 <!--
  * @Author: wangtengteng
  * @Date: 2020-10-29 18:03:59
- * @LastEditTime: 2020-11-04 17:09:17
+ * @LastEditTime: 2020-11-12 16:06:44
  * @FillPath: Do not edit
 -->
 <template>
@@ -47,8 +47,7 @@
 </script>
 <style lang="scss" rel="stylesheet/scss">
   .edit-div {
-    width: 100%;
-    min-height: 500px;
+    min-height: 200px;
     padding: 20px;
     overflow: auto;
     word-break: break-all;

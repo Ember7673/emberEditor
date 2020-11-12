@@ -1,24 +1,34 @@
+<!--
+ * @Author: wangtengteng
+ * @Date: 2020-10-29 18:04:07
+ * @LastEditTime: 2020-11-12 16:19:47
+ * @FillPath: Do not edit
+-->
+
 # zxb-editor
 
-## Project setup
+## 下载
+
 ```
+下载富文本编辑器插件
+npm install zxb-editor
+下载依赖
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 注册全局组件
+
 ```
-npm run serve
+import EditorPanel from './editorRegister'
+Vue.use(EditorPanel);
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### 使用
 
-### Lints and fixes files
 ```
-npm run lint
+<EditorPanel @getContent="getContent"></EditorPanel>
+// 获取富文本编辑器内容
+getContent(content) {
+  console.log('content', content)
+}
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
