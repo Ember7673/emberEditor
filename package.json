@@ -1,11 +1,13 @@
 {
   "name": "zxb-editor",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
+  "main": "lib/editorPanel.umd.js",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name editorPanel --dest lib src/lib/index.js"
   },
   "dependencies": {
     "axios": "^0.21.0",

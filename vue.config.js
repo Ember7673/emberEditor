@@ -1,14 +1,14 @@
 /*
  * @Author: wangtengteng
  * @Date: 2020-10-30 18:13:15
- * @LastEditTime: 2020-11-13 10:21:42
+ * @LastEditTime: 2020-11-13 11:14:12
  * @FillPath: Do not edit
  */
 const path = require('path');
 module.exports = {
   pages: {
     index: {
-      entry: 'src/editorRegister.js'
+      entry: 'src/lib/index.js'
     }
   },
   /* 输出文件目录：在npm run build时，生成文件的目录名称 */
