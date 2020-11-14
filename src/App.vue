@@ -1,12 +1,12 @@
 <!--
  * @Author: wangtengteng
  * @Date: 2020-10-29 18:03:59
- * @LastEditTime: 2020-11-12 16:19:09
+ * @LastEditTime: 2020-11-13 17:44:19
  * @FillPath: Do not edit
 -->
 <template>
   <div id="app">
-    <!-- <EditorPanel @getContent="getContent"></EditorPanel> -->
+    <EditorPanel @getContent="getContent"></EditorPanel>
   </div>
 </template>
 
@@ -19,9 +19,9 @@
       }
     },
     methods: {
-      // getContent(content) {
-      //   console.log('content', content)
-      // }
+      getContent(content) {
+        console.log('content', content)
+      }
     }
   }
 </script>

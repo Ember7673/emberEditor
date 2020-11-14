@@ -1,7 +1,7 @@
 /*
  * @Author: wangtengteng
  * @Date: 2020-10-30 18:13:15
- * @LastEditTime: 2020-11-13 11:14:12
+ * @LastEditTime: 2020-11-14 15:18:02
  * @FillPath: Do not edit
  */
 const path = require('path');
@@ -66,5 +66,15 @@ module.exports = {
       })
       .end();
   },
-  lintOnSave: false
+  lintOnSave: false,
 }
+
+// module.exports = (api, options, rootOptions) => {
+//   // 修改 `package.json` 里的字段
+//   api.extendPackage({
+//     dependencies: {
+//       "element-ui": "^2.14.1",
+//       "axios": "^0.21.0"
+//     }
+//   });
+// }
