@@ -1,12 +1,12 @@
 <!--
  * @Author: wangtengteng
  * @Date: 2020-10-29 18:03:59
- * @LastEditTime: 2020-11-13 17:44:19
+ * @LastEditTime: 2020-11-16 17:19:09
  * @FillPath: Do not edit
 -->
 <template>
   <div id="app">
-    <EditorPanel @getContent="getContent"></EditorPanel>
+    <EditorPanel v-model="content"></EditorPanel>
   </div>
 </template>
 
@@ -15,12 +15,12 @@
     name: 'App',
     data() {
       return {
-
+        content: ''
       }
     },
-    methods: {
-      getContent(content) {
-        console.log('content', content)
+    watch: {
+      content(newval, oldval) {
+        console.log('content---- ', newval)
       }
     }
   }

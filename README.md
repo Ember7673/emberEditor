@@ -1,7 +1,7 @@
 <!--
  * @Author: wangtengteng
  * @Date: 2020-10-29 18:04:07
- * @LastEditTime: 2020-11-14 15:41:13
+ * @LastEditTime: 2020-11-16 18:16:08
  * @FillPath: Do not edit
 -->
 
@@ -34,9 +34,6 @@ Vue.prototype.$axios = axios;
 ### 使用
 
 ```
-<EditorPanel @getContent="getContent"></EditorPanel>
-// 获取富文本编辑器内容
-getContent(content) {
-  console.log('content', content)
-}
+//可以直接通过v-model获取输入内容
+<EditorPanel v-model="content"></EditorPanel>
 ```
