@@ -1,13 +1,13 @@
 <!--
  * @Author: wangtengteng
  * @Date: 2020-10-29 18:03:59
- * @LastEditTime: 2020-11-18 16:48:47
+ * @LastEditTime: 2020-11-18 18:06:28
  * @FillPath: Do not edit
 -->
 <template>
   <div id="app">
-    <EditorPanel :key="'editoe1'" :id="'editoe1'" v-model="content"></EditorPanel>
-    <EditorPanel :key="'editoe2'" :id="'editoe2'" v-model="content1"></EditorPanel>
+    <EditorPanel :id="'editoe1'" v-model="content"></EditorPanel>
+    <EditorPanel :id="'editoe2'" v-model="content1"></EditorPanel>
   </div>
 </template>
 
