@@ -1,7 +1,8 @@
 {
   "name": "zxb-editor",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "private": false,
+  "main": "lib/editorPanel.umd.js",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",

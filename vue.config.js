@@ -1,16 +1,16 @@
 /*
  * @Author: wangtengteng
  * @Date: 2020-10-30 18:13:15
- * @LastEditTime: 2020-11-17 17:00:44
+ * @LastEditTime: 2020-11-18 09:33:23
  * @FillPath: Do not edit
  */
 const path = require('path');
 module.exports = {
-  // pages: {
-  //   index: {
-  //     entry: 'src/lib/index.js'
-  //   }
-  // },
+  pages: {
+    index: {
+      entry: 'src/lib/index.js'
+    }
+  },
   /* 输出文件目录：在npm run build时，生成文件的目录名称 */
   outputDir: 'dist',
   /* 放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录 */
