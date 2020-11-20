@@ -1,7 +1,7 @@
 <!--
  * @Author: wangtengteng
  * @Date: 2020-10-29 18:03:59
- * @LastEditTime: 2020-11-20 10:04:52
+ * @LastEditTime: 2020-11-20 14:30:29
  * @FillPath: Do not edit
 -->
 <template>
@@ -22,10 +22,10 @@
     },
     watch: {
       content(newval, oldval) {
-        // console.log('content----1 ', newval)
+        console.log('content----1 ', newval)
       },
       content1(newval, oldval) {
-        // console.log('content----2 ', newval)
+        console.log('content----2 ', newval)
       }
     }
   }
